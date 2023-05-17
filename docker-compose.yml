@@ -9,14 +9,14 @@ services:
       - db
     restart: always
     ports:
-      - 8080:80
+      - 80:80
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: $MYSQL_USER
       WORDPRESS_DB_PASSWORD: $MYSQL_PASSWORD
       WORDPRESS_DB_NAME: ecomdemostore
     volumes:
-      - $VOLUME_PATH_FOR_WP:/var/www/html
+      - "${VOLUME_PATH_FOR_WP}:/var/www/html"
 
   db:
     image: mysql:5.7
@@ -28,4 +28,4 @@ services:
       MYSQL_PASSWORD: $MYSQL_PASSWORD
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
     volumes:
-      - $VOLUME_PATH_FOR_DB:/var/lib/mysql
+      - "${VOLUME_PATH_FOR_DB}:/var/lib/mysql"
