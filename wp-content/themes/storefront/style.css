@@ -664,14 +664,19 @@ body {
 .page-template-template-homepage.has-post-thumbnail .type-page.has-post-thumbnail .entry-content,
 .page-template-template-homepage.has-post-thumbnail .type-page.has-post-thumbnail .entry-title {
     opacity: 0;
-    transition: all, ease, .5s
+    transition: all, ease, .5s;
+    background: green;
 }
 
 .page-template-template-homepage.has-post-thumbnail .type-page.has-post-thumbnail .entry-content.loaded,
 .page-template-template-homepage.has-post-thumbnail .type-page.has-post-thumbnail .entry-title.loaded {
-    opacity: 1
+    opacity: 1;
+    background: yellow;
 }
 
+.entry-title.loaded {
+    background: red;
+}
 .site-footer {
     background-color: #f3f3f3;
     color: #3b3c3f;
@@ -1926,7 +1931,8 @@ button.menu-toggle::after {
         float: left;
         margin-left: 0;
         margin-right: 0;
-        clear: both
+        clear: both;
+        background: rgb(17, 255, 0);
     }
 
     .site-header .site-branding img {
@@ -1997,7 +2003,8 @@ button.menu-toggle::after {
     .site-logo-anchor,
     .site-logo-link,
     .custom-logo-link {
-        margin-bottom: 1.41575em
+        margin-bottom: 1.41575em;
+        background: yellow;
     }
 
     .site-header .subscribe-and-connect-connect {
