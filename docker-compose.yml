@@ -2,12 +2,11 @@ version: '3.1'
 
 services:
 
-  wordpress:
+  wordpress-dev:
     image: wordpress:6.2.1-apache
-    # container_name: demostore_bc_wordpress
     container_name: ${WP_CONTAINER_NAME:?}
     depends_on:
-      - db
+      - db-dev
     restart: always
     ports:
       - "${PORT_WP:?}:80"
@@ -15,11 +14,11 @@ services:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: ${MYSQL_USER:?}
       WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD:?}
-      WORDPRESS_DB_NAME: ecomdemostore
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME:?}
     volumes:
       - "${VOLUME_PATH_FOR_WP:?}:/var/www/html"
 
-  db:
+  db-dev:
     image: mysql:5.7
     # container_name: demostore_bc_mysql
     container_name: ${MYSQL_CONTAINER_NAME:?}
@@ -27,7 +26,7 @@ services:
     ports:
       - "${PORT_MYSQL:?}:3306"
     environment:
-      MYSQL_DATABASE: ecomdemostore
+      MYSQL_DATABASE: ${WORDPRESS_DB_NAME:?}
       MYSQL_USER: ${MYSQL_USER:?}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:?}
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
