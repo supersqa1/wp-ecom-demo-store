@@ -2,11 +2,10 @@ version: '3.1'
 
 services:
 
-  wordpress-dev:
+  wordpress:
     image: wordpress:6.2.1-apache
-    container_name: ${WP_CONTAINER_NAME:?}
     depends_on:
-      - db-dev
+      - db
     restart: always
     ports:
       - "${PORT_WP:?}:80"
@@ -18,10 +17,8 @@ services:
     volumes:
       - "${VOLUME_PATH_FOR_WP:?}:/var/www/html"
 
-  db-dev:
+  db:
     image: mysql:5.7
-    # container_name: demostore_bc_mysql
-    container_name: ${MYSQL_CONTAINER_NAME:?}
     restart: always
     ports:
       - "${PORT_MYSQL:?}:3306"
