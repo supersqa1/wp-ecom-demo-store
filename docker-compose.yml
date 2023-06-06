@@ -4,30 +4,28 @@ services:
 
   wordpress:
     image: wordpress:6.2.1-apache
-    container_name: demostore_bc_wordpress
     depends_on:
       - db
     restart: always
     ports:
-      - "${PORT_WP}:80"
+      - "${PORT_WP:?}:80"
     environment:
       WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: $MYSQL_USER
-      WORDPRESS_DB_PASSWORD: $MYSQL_PASSWORD
-      WORDPRESS_DB_NAME: ecomdemostore
+      WORDPRESS_DB_USER: ${MYSQL_USER:?}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD:?}
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME:?}
     volumes:
-      - "${VOLUME_PATH_FOR_WP}:/var/www/html"
+      - "${VOLUME_PATH_FOR_WP:?}:/var/www/html"
 
   db:
     image: mysql:5.7
-    container_name: demostore_bc_mysql
     restart: always
     ports:
-      - "${PORT_MYSQL}:3306"
+      - "${PORT_MYSQL:?}:3306"
     environment:
-      MYSQL_DATABASE: ecomdemostore
-      MYSQL_USER: $MYSQL_USER
-      MYSQL_PASSWORD: $MYSQL_PASSWORD
+      MYSQL_DATABASE: ${WORDPRESS_DB_NAME:?}
+      MYSQL_USER: ${MYSQL_USER:?}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?}
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
     volumes:
-      - "${VOLUME_PATH_FOR_DB}:/var/lib/mysql"
+      - "${VOLUME_PATH_FOR_DB:?}:/var/lib/mysql"

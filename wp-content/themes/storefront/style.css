@@ -1932,7 +1932,7 @@ button.menu-toggle::after {
         margin-left: 0;
         margin-right: 0;
         clear: both;
-        background: rgb(255, 0, 234);
+        background: rgb(204, 222, 154);
     }
 
     .site-header .site-branding img {
